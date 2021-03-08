@@ -1,0 +1,16 @@
+#配置数据源
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/sc_vehicle?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: 123
+    driver-class-name: com.mysql.jdbc.Driver
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  application:
+    name: smartcommunity-vehicle
+#设置端口
+server:
+  port: 9000
