@@ -94,6 +94,9 @@
     resident_id, resident_name, resident_pwd, resident_phone, resident_email, resident_created, 
     resident_state, resident_plate, resident_task
   </sql>
+  <select id="findAllResidents"  resultMap="BaseResultMap">
+    select * from resident
+  </select>
   <select id="selectByExample" parameterType="com.bishe.smartcommunity.resident.domain.ResidentExample" resultMap="BaseResultMap">
     <!--
       WARNING - @mbg.generated

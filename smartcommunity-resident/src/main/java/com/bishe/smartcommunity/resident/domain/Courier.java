@@ -1,7 +1,9 @@
 package com.bishe.smartcommunity.resident.domain;
 
-import java.io.Serializable;
+import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
+@Repository
 public class Courier implements Serializable {
     /**
      *

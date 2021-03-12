@@ -88,6 +88,9 @@
     -->
     vehicle_id, vehicle_owner_ID, vehicle_state, License_plate
   </sql>
+  <select id="findAllVehicles" resultMap="BaseResultMap">
+    select * from vehicle
+  </select>
   <select id="selectByExample" parameterType="com.bishe.smartcommunity.vehicle.domain.VehicleExample" resultMap="BaseResultMap">
     <!--
       WARNING - @mbg.generated

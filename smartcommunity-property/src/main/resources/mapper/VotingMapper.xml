@@ -88,6 +88,9 @@
     -->
     vote_id, sunmmary, support, oppose
   </sql>
+  <select id="findAllVotings" resultMap="BaseResultMap">
+    select * from voting
+  </select>
   <select id="selectByExample" parameterType="com.bishe.smartcommunity.property.domain.VotingExample" resultMap="BaseResultMap">
     <!--
       WARNING - @mbg.generated

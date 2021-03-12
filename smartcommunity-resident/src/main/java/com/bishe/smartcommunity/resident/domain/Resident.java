@@ -1,8 +1,10 @@
 package com.bishe.smartcommunity.resident.domain;
 
+import org.springframework.stereotype.Repository;
+
 import java.io.Serializable;
 import java.util.Date;
-
+@Repository
 public class Resident implements Serializable {
     /**
      *

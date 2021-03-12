@@ -5,6 +5,7 @@ import com.bishe.smartcommunity.resident.domain.Task;
 
 import java.util.List;
 
+
 public interface TaskService {
 
     Task newtask(Resident resident, Task task);

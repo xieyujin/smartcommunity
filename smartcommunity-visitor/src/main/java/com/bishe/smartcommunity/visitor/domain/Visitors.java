@@ -1,7 +1,9 @@
 package com.bishe.smartcommunity.visitor.domain;
 
-import java.io.Serializable;
+import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
+@Repository
 public class Visitors implements Serializable {
     /**
      *

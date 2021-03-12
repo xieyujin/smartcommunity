@@ -88,6 +88,9 @@
     -->
     visitee_id, visitor_id, visitor_name, visitor_state
   </sql>
+  <select id="findAllVisitors" resultMap="BaseResultMap">
+    select * from visitors
+  </select>
   <select id="selectByExample" parameterType="com.bishe.smartcommunity.visitor.domain.VisitorsExample" resultMap="BaseResultMap">
     <!--
       WARNING - @mbg.generated

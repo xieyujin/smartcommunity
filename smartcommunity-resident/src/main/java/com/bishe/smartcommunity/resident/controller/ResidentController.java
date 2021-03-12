@@ -10,26 +10,21 @@ import com.bishe.smartcommunity.resident.utils.ResidentTokenVo;
 import com.bishe.smartcommunity.resident.utils.TaskVo;
 import com.bishe.smartcommunity.smartcommunitycommon.utils.R;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/resident")
 public class ResidentController {
+    @Autowired
     private ResidentService residentService;
+    @Autowired
     private CourierService courierService;
+    @Autowired
     private TaskService taskService;
 
     //登录
@@ -67,6 +62,7 @@ public class ResidentController {
                 return R.error("您不是小区的住户，没有发起的权限");
             }
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return R.error(e.getMessage());
         }
     }
@@ -94,56 +90,24 @@ public class ResidentController {
     }
 
     //批量添加住户
-    @RequestMapping("/importResident-xlsx")
+    @PostMapping("/importResident-xlsx")
     public R importResident(@RequestParam(value = "multipartFile") MultipartFile multipartFile){
-        try {
-            FileInputStream inputStream = (FileInputStream) multipartFile.getInputStream();
-            XSSFWorkbook xssfWorkbook = new XSSFWorkbook(inputStream);
-            //记录每一行的数据，并记录错误的行数
-            XSSFSheet sheet = xssfWorkbook.getSheetAt(0);
-            ArrayList<Resident> list = new ArrayList<>();
-            ArrayList<Integer> err = new ArrayList<>();
-            for (int rowIndex=1; rowIndex<=sheet.getLastRowNum(); rowIndex++){
-                XSSFRow row = sheet.getRow(rowIndex);
-                Resident resident = new Resident();
-                if(row==null){
-                    continue;
-                }
-                XSSFCell nameCell = row.getCell(0);
-                XSSFCell pwdcell = row.getCell(1);
-                XSSFCell phonecell = row.getCell(2);
-                phonecell.getNumericCellValue();
-                phonecell.setCellType(CellType.STRING);
-                if(phonecell.getStringCellValue().length() != 11){
-                    err.add(rowIndex+1);
-                }
-                resident.setResidentName(nameCell.getStringCellValue());
-                resident.setResidentPwd(pwdcell.getStringCellValue());
-                resident.setResidentPhone(phonecell.getStringCellValue());
-                resident.setResidentCreated(new Date());
-                list.add(resident);
-            }
-            xssfWorkbook.close();
-            inputStream.close();
-
-            try {
-                if(list!=null){
-                    if (err.size()!=0){
-                        return R.error("添加失败，错误行数："+err.toString());
-                    }else {
-                        return R.success("添加成功人数："+residentService.importResident((List<Resident>) list));
-                    }
-                }else {
-                    return R.error("请添加住户数据!");
-                }
-            } catch (Exception e) {
-                return R.error(e.getMessage());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return R.error("导入失败！");
+        R r = residentService.importResident(multipartFile);
+        return r;
 
     }
+
+    //查看所有住户
+    @PostMapping("/listAllResidents")
+    public R listAllResidents(@RequestBody String str){
+
+
+            System.out.println(str);
+            List<Resident> allResidents = residentService.findAllResidents();
+            System.out.println(1);
+            return R.success(allResidents);
+
+    }
+
 
 }

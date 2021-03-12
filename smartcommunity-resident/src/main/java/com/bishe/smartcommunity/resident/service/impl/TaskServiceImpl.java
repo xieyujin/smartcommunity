@@ -4,12 +4,12 @@ import com.bishe.smartcommunity.resident.domain.Resident;
 import com.bishe.smartcommunity.resident.domain.Task;
 import com.bishe.smartcommunity.resident.mapper.TaskMapper;
 import com.bishe.smartcommunity.resident.service.TaskService;
-import com.bishe.smartcommunity.smartcommunitycommon.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
-
+@Service
 public class TaskServiceImpl implements TaskService {
 
     @Autowired

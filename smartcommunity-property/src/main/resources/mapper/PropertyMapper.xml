@@ -93,6 +93,9 @@
     property_id, property_name, property_pwd, property_phone, property_state, Property_score, 
     Property_task, property_notice
   </sql>
+  <select id="findAllProperties" resultMap="BaseResultMap">
+    select * from property
+  </select>
   <select id="selectByExample" parameterType="com.bishe.smartcommunity.property.domain.PropertyExample" resultMap="BaseResultMap">
     <!--
       WARNING - @mbg.generated

@@ -4,6 +4,7 @@ import com.bishe.smartcommunity.resident.domain.Courier;
 
 import java.util.List;
 
+
 public interface CourierService {
     Courier newCourier(Courier courier);
 

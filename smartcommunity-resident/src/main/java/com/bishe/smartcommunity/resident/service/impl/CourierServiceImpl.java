@@ -5,12 +5,15 @@ import com.bishe.smartcommunity.resident.domain.CourierExample;
 import com.bishe.smartcommunity.resident.mapper.CourierMapper;
 import com.bishe.smartcommunity.resident.service.CourierService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class CourierServiceImpl implements CourierService {
+
     @Autowired
     private CourierMapper courierMapper;
+    @Autowired
     private CourierExample courierExample;
 
     @Override

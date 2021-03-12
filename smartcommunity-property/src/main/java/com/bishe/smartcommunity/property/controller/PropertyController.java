@@ -1,5 +1,6 @@
 package com.bishe.smartcommunity.property.controller;
 
+import com.bishe.smartcommunity.property.domain.Property;
 import com.bishe.smartcommunity.property.domain.Voting;
 import com.bishe.smartcommunity.property.service.PropertyService;
 import com.bishe.smartcommunity.property.service.VoteService;
@@ -11,12 +12,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/property")
 public class PropertyController {
 
-    PropertyService propertyService;
-    VoteService voteService;
+    @Autowired
+    private PropertyService propertyService;
+    @Autowired
+    private VoteService voteService;
 
     @PostMapping("/noticeboard")
     public R noticeboard(@RequestBody NoticeVo vo){
@@ -42,6 +47,12 @@ public class PropertyController {
         } catch (Exception e) {
             return R.error(e.getMessage());
         }
+    }
+
+    @PostMapping("/allProperties")
+    public R allProperties(){
+        List<Property> allProperties = propertyService.allProperties();
+        return R.success(allProperties);
     }
 
 }
